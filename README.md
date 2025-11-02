@@ -9,9 +9,9 @@
 ---
 
 ## 📸 Demo & Screenshots
-- `/images/screenshot_1.jpg`
-- `/images/screenshot_2.jpg`
-- `/images/screenshot_3.jpg`
+- ![Screenshot 1](images/screenshot_1.jpg)
+- ![Screenshot 2](images/screenshot_2.jpg)
+- ![Screenshot 3](images/screenshot_3.jpg)
 
 ---
 
