@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solomon Christ AI - Productivity App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom CSS variables for theme colors */
+    :root {
+      --deep-work: #3b82f6; /* blue-500 */
+      --study: #8b5cf6; /* violet-500 */
+      --creativity: #ec4899; /* pink-500 */
+      --custom: #10b981; /* emerald-500 */
+      --ambience-1: #2dd4bf; /* teal-400 */
+      --ambience-2: #a3e635; /* lime-400 */
+      --ambience-3: #fbbf24; /* amber-400 */
+      --break: #f97316; /* orange-500 */
+      --active-color: var(--deep-work);
+    }
+    .theme-deep-work { --active-color: var(--deep-work); }
+    .theme-study { --active-color: var(--study); }
+    .theme-creativity { --active-color: var(--creativity); }
+    .theme-custom { --active-color: var(--custom); }
+    .theme-ambience-1 { --active-color: var(--ambience-1); }
+    .theme-ambience-2 { --active-color: var(--ambience-2); }
+    .theme-ambience-3 { --active-color: var(--ambience-3); }
+    .theme-break { --active-color: var(--break); }
+
+    /* Enhanced Breathing animation */
+    @keyframes gradient-breathe {
+      0%, 100% { background-size: 100% 100%; opacity: 0.8; }
+      50% { background-size: 150% 150%; opacity: 1; }
+    }
+    .animate-gradient-breathe {
+      background: radial-gradient(circle, var(--active-color), transparent 70%);
+      background-position: center;
+      animation: gradient-breathe 6s ease-in-out infinite;
+    }
+    
+    /* Phase End Flash Animation */
+    @keyframes phase-end-flash {
+      0% { box-shadow: 0 0 0 0px rgba(255, 255, 255, 0); }
+      50% { box-shadow: 0 0 0 20px var(--active-color-translucent); }
+      100% { box-shadow: 0 0 0 40px rgba(255, 255, 255, 0); }
+    }
+    .phase-end-flash-animation {
+      --active-color-translucent: hsla(from var(--active-color) h s l / 0.3);
+      animation: phase-end-flash 1s ease-out;
+    }
+    
+    /* Toggle switch dot transition */
+    .dot {
+      transition: transform 0.3s ease;
+    }
+
+    /* Custom styles for range input thumb */
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 1rem;
+        height: 1rem;
+        background: var(--active-color);
+        border-radius: 9999px;
+        cursor: pointer;
+        border: 2px solid white;
+        margin-top: -4px; /* Adjust vertical alignment */
+    }
+
+    input[type=range]::-moz-range-thumb {
+        width: 1rem;
+        height: 1rem;
+        background: var(--active-color);
+        border-radius: 9999px;
+        cursor: pointer;
+        border: 2px solid white;
+    }
+
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://aistudiocdn.com/react@^19.2.0",
+      "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+      "react/": "https://aistudiocdn.com/react@^19.2.0/",
+      "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0"
+    }
+  }
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
