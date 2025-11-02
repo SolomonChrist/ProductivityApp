@@ -2,12 +2,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Header from './components/Header';
 import TimerDisplay from './components/TimerDisplay';
 import Controls from './components/Controls';
-import Settings from './components/Settings';
-import StatsDisplay from './components/StatsDisplay';
 import TaskList from './components/TaskList';
-import SiteFooter from './components/SiteFooter';
 import MusicSettingsModal from './components/MusicSettingsModal';
-import { MusicIcon } from './components/Icons';
+import OptionsSidebar from './components/OptionsSidebar';
 import { TimerSettings, TimerPhase, Stats, Task, FocusMode, CustomMusicConfig } from './types';
 import { DEFAULT_TIMER_SETTINGS, FOCUS_MODES_CONFIG, BREAK_CONFIG, POINTS_PER_POMODORO, THEME_CONFIG } from './constants';
 
@@ -76,6 +73,7 @@ const App: React.FC = () => {
   const [isMusicModalOpen, setIsMusicModalOpen] = useState(false);
   const [musicConfig, setMusicConfig] = useState(mergeMusicConfigs);
   const [phaseJustEnded, setPhaseJustEnded] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [focusVolume, setFocusVolume] = useState(1);
   const [ambientVolume, setAmbientVolume] = useState(1);
   
@@ -409,95 +407,63 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className={`flex flex-col lg:flex-row min-h-screen font-sans text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-900 transition-colors duration-500 theme-${phase === TimerPhase.Focus ? musicConfig.focusModes[focusMode]?.color : BREAK_CONFIG.color}`}>
-      <main className="flex-grow flex flex-col items-center justify-center p-4 lg:p-8">
-        <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
-            <Header />
-
-            <div className="text-center my-4">
-                <h2 className="text-lg font-semibold">Focus Soundscape</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Select your main audio for focus sessions.</p>
-            </div>
-            <div className="w-full max-w-xs px-4 mb-4">
-              <input 
-                type="range" 
-                min="0" 
-                max="1" 
-                step="0.01" 
-                value={focusVolume} 
-                onChange={(e) => setFocusVolume(parseFloat(e.target.value))}
-                className="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
-                aria-label="Focus volume"
-              />
-            </div>
-            <div className='flex items-center flex-wrap justify-center gap-2 sm:gap-4'>
-                {Object.values(FocusMode).map(mode => (
-                    <button key={mode} onClick={() => setFocusMode(mode)} className={`px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition ${focusMode === mode ? 'bg-[var(--active-color)] text-white' : 'bg-white/20 dark:bg-gray-800/50'}`}>
-                        {mode}
-                    </button>
-                ))}
-            </div>
-
-            <div className="text-center mt-6 mb-4">
-                <h2 className="text-lg font-semibold">Ambient Sound Layer</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Optionally, play a background sound simultaneously.</p>
-            </div>
-            <div className="w-full max-w-xs px-4 mb-4">
-              <input 
-                type="range" 
-                min="0" 
-                max="1" 
-                step="0.01" 
-                value={ambientVolume} 
-                onChange={(e) => setAmbientVolume(parseFloat(e.target.value))}
-                className="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
-                aria-label="Ambient volume"
-              />
-            </div>
-            <div className='flex items-center flex-wrap justify-center gap-2 sm:gap-4 mb-4'>
-                {Object.keys(musicConfig.themes).map(themeName => (
-                    <button key={themeName} onClick={() => handleAmbienceClick(themeName)} className={`px-3 py-2 sm:px-4 rounded-full text-xs sm:text-sm font-semibold transition ${activeAmbienceKey === themeName ? 'bg-[var(--active-color)] text-white' : 'bg-white/20 dark:bg-gray-800/50'}`}>
-                        {themeName.replace('CUSTOM ', '')}
-                    </button>
-                ))}
-                <button onClick={() => setIsMusicModalOpen(true)} className='p-2 rounded-full bg-white/20 dark:bg-gray-800/50' aria-label="Music settings">
-                    <MusicIcon className="w-5 h-5" />
-                </button>
-            </div>
-
-            <div className="text-center mt-6 mb-2">
-              <h2 className="text-md font-semibold">Manual Timer Mode</h2>
-              <p className="text-xs text-gray-500 dark:text-gray-400">Switch between focus and break timers.</p>
-            </div>
-            <div className="flex justify-center items-center space-x-4 mb-4">
-                {Object.values(TimerPhase).map((p) => (
-                    <button
-                        key={p}
-                        onClick={() => handlePhaseSwitch(p)}
-                        className={`px-3 py-1 text-sm rounded-full transition ${phase === p ? 'bg-white/30 dark:bg-gray-700/80 font-semibold' : 'hover:bg-white/20 dark:hover:bg-gray-800/60'}`}
-                    >
-                        {p}
-                    </button>
-                ))}
-            </div>
-            <TimerDisplay timeLeft={timeLeft} phase={phase} settings={settings} showBreathingGuide={showBreathingGuide} phaseJustEnded={phaseJustEnded} />
-            <Controls isActive={isActive} onStartPause={handleStartPause} />
-            <div className="w-full mt-8 space-y-6">
-                <StatsDisplay stats={stats} />
-                <Settings 
-                    settings={settings} 
-                    setSettings={setSettings} 
-                    showBreathingGuide={showBreathingGuide} 
-                    setShowBreathingGuide={setShowBreathingGuide} 
+    <div className={`bg-gray-100 dark:bg-gray-900 transition-colors duration-500 theme-${phase === TimerPhase.Focus ? musicConfig.focusModes[focusMode]?.color : BREAK_CONFIG.color}`}>
+        <div className="flex flex-col lg:flex-row min-h-screen font-sans text-gray-800 dark:text-gray-200">
+            <div className={`order-3 lg:order-1 transition-all duration-300 ease-in-out flex-shrink-0 ${isSidebarOpen ? 'lg:w-[30%]' : 'lg:w-16'}`}>
+                <OptionsSidebar
+                    isSidebarOpen={isSidebarOpen}
+                    toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+                    focusMode={focusMode}
+                    setFocusMode={setFocusMode}
+                    focusVolume={focusVolume}
+                    setFocusVolume={setFocusVolume}
+                    musicConfig={musicConfig}
+                    activeAmbienceKey={activeAmbienceKey}
+                    handleAmbienceClick={handleAmbienceClick}
+                    ambientVolume={ambientVolume}
+                    setAmbientVolume={setAmbientVolume}
+                    setIsMusicModalOpen={setIsMusicModalOpen}
+                    stats={stats}
+                    settings={settings}
+                    setSettings={setSettings}
+                    showBreathingGuide={showBreathingGuide}
+                    setShowBreathingGuide={setShowBreathingGuide}
                     onReset={handleReset}
                     onExport={handleExport}
                     onImport={handleImport}
                 />
             </div>
-            <SiteFooter />
+            
+            <main className="order-1 lg:order-2 flex-grow flex flex-col items-center justify-center p-4 lg:p-8 relative">
+                <div className="w-full max-w-md mx-auto flex flex-col items-center">
+                    <Header />
+
+                    <div className="text-center mt-8 mb-2">
+                      <h2 className="text-md font-semibold">Timer Mode</h2>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">Switch between focus and break.</p>
+                    </div>
+                    <div className="flex justify-center items-center space-x-4 mb-4">
+                        {Object.values(TimerPhase).map((p) => (
+                            <button
+                                key={p}
+                                onClick={() => handlePhaseSwitch(p)}
+                                className={`px-3 py-1 text-sm rounded-full transition ${phase === p ? 'bg-white/30 dark:bg-gray-700/80 font-semibold' : 'hover:bg-white/20 dark:hover:bg-gray-800/60'}`}
+                            >
+                                {p}
+                            </button>
+                        ))}
+                    </div>
+                    
+                    <TimerDisplay timeLeft={timeLeft} phase={phase} settings={settings} showBreathingGuide={showBreathingGuide} phaseJustEnded={phaseJustEnded} />
+                    <Controls isActive={isActive} onStartPause={handleStartPause} />
+                </div>
+            </main>
+
+            <div className="order-2 lg:order-3 lg:w-[20%] flex-shrink-0">
+                <TaskList tasks={tasks} addTask={addTask} toggleTask={toggleTask} deleteTask={deleteTask} />
+            </div>
         </div>
-      </main>
-      <TaskList tasks={tasks} addTask={addTask} toggleTask={toggleTask} deleteTask={deleteTask} />
+
       <audio ref={audioRef} loop />
       <audio ref={ambienceAudioRef} loop />
       <audio ref={sfxRef} />

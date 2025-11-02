@@ -45,7 +45,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, addTask, toggleTask, deleteT
   };
 
   return (
-    <aside className="w-full lg:w-80 bg-gray-200 dark:bg-gray-900/50 p-6 flex flex-col h-screen">
+    <aside className="w-full bg-gray-200 dark:bg-gray-900/50 p-6 flex flex-col h-screen">
       <h2 className="text-xl font-bold mb-4">Session Tasks</h2>
       <form onSubmit={handleSubmit} className="flex mb-4">
         <input
