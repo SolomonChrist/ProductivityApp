@@ -1,24 +1,23 @@
 # Solomon Christ AI - Productivity App 🧘🎵
 
-> Enter the Flow State with a fully-featured Pomodoro timer, ambient soundscapes, and integrated task management.
+> Enter the Flow State with a fully-featured Vibe Coded Productivity App with Pomodoro timer, ambient soundscapes, and integrated task management!
 
-**Solomon Christ AI - Productivity App** is an open-source, all-in-one productivity web application designed to help you concentrate and get work done. It combines a customizable Pomodoro timer with a library of ambient soundscapes that adapt to your work/break cycles. With integrated task management and gamification, it provides a comprehensive toolkit to minimize distractions and maximize your focus.
+**Solomon Christ AI - Productivity App** is an open-source, all-in-one productivity web application designed to help you concentrate and get work done. It combines a customizable Pomodoro timer with the ability to add your own custom mp3 sounds, music and audio to get you right into the flow state! With integrated task management and gamification, it provides a comprehensive toolkit to minimize distractions and maximize your focus.
 
 **NOTE:** This was a Vibe Coded project by **Solomon Christ** and updates are the responsibility of community contributors.
 
 ---
 
 ## 📸 Demo & Screenshots
-(App screenshots would go here)
-- `images/screenshot_1.jpg`
-- `images/screenshot_2.jpg`
-- `images/screenshot_3.jpg`
+- ![Screenshot 1](images/screenshot_1.jpg)
+- ![Screenshot 2](images/screenshot_2.jpg)
+- ![Screenshot 3](images/screenshot_3.jpg)
 
 ---
 
 ## 🎯 Vision
 
-I created this app for **students, professionals, and creatives to save time, reduce stress, and enhance productivity**. By creating an immersive focus environment, Solomon Christ AI - Productivity App helps you build positive work habits and achieve a 'flow state' on demand.
+I created this app for **myself, students, professionals, and creatives to save time, reduce stress, and enhance productivity**. By creating an immersive focus environment, Solomon Christ AI - Productivity App helps you build positive work habits and achieve a 'flow state' on demand.
 
 ---
 
@@ -27,12 +26,12 @@ I created this app for **students, professionals, and creatives to save time, re
 In a world full of distractions, maintaining focus is a major challenge. Many people struggle with:
 - Procrastination and difficulty starting tasks.
 - Juggling multiple tools (timer, to-do list, music player).
-- Finding the right background audio that isn't distracting.
+- Being able to customize a tool to achieve flow state on YOUR TERMS!
 
 **This app solves these problems by providing a single, cohesive solution:**
 - A **structured Pomodoro timer** to break down work into manageable intervals.
 - An **integrated task list** to clarify your goals for each session.
-- **Adaptive soundscapes** that sync with your timer to guide you through focus and break periods seamlessly.
+- **Customizable soundscapes** that YOU get to choose.
 - **Gamification** to motivate you and reward consistency.
 
 ---
@@ -41,11 +40,10 @@ In a world full of distractions, maintaining focus is a major challenge. Many pe
 
 - 🍅 **Customizable Pomodoro Timer** - Adjust focus, short break, and long break durations to fit your workflow.
 - ✅ **Integrated Task Management** - Create a to-do list for each session, check off completed tasks, and export your list.
-- 🎧 **Ambient Soundscapes** - Choose from different modes (`Deep Work`, `Study`) and themes (`Rainy Day Cafe`, `Forest Ambience`) to create the perfect audio environment.
+- 🎧 **Customizable Soundscapes** - Choose from different modes (`Deep Work`, `Study`) and your own custom ambient themes to create the perfect audio environment.
 - 🎵 **Custom Audio** - Set your own MP3 URLs for all music and timer sound effects.
-- ✨ **Gamification System** - Earn points for completed Pomodoros, build a streak, and unlock achievement soundscapes.
+- ✨ **Gamification System** - Earn points for completed Pomodoros and build a streak!
 - 🧘 **Guided Breathing** - An optional visual breathing guide appears during breaks to help you relax and reset.
-- 🌗 **Light/Dark Mode** - A sleek interface that's easy on the eyes, day or night.
 - 💾 **Data Portability** - Import and export all your settings and tasks to a JSON file.
 - 🌐 **No Backend Required** - Runs entirely in your browser. All your data is stored locally.
 
@@ -63,11 +61,10 @@ In a world full of distractions, maintaining focus is a major challenge. Many pe
 
 1. **Clone the repo:**
    ```bash
-   git clone https://github.com/your-username/xavor-focus.git
-   cd xavor-focus
+   git clone https://github.com/SolomonChrist/ProductivityApp.git
+   cd ProductivityApp
    ```
-2. **Open the app in your browser.**
-   - Simply open the `index.html` file in a web browser. No complex setup or build process is needed.
+2. **Setup the required items to run.**
 3. **Set your timers and choose a soundscape.**
 4. **Add tasks for your session.**
 5. **Start your focus session!**
