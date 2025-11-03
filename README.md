@@ -9,9 +9,9 @@
 ---
 
 ## 📸 Demo & Screenshots
-- ![Screenshot 1](images/screenshot_1.jpg)
-- ![Screenshot 2](images/screenshot_2.jpg)
-- ![Screenshot 3](images/screenshot_3.jpg)
+![Screenshot 1](screenshot_1.jpg)
+![Screenshot 2](screenshot_2.jpg)
+![Screenshot 3](screenshot_3.jpg)
 
 ---
 
