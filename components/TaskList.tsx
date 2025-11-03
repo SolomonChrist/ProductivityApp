@@ -30,7 +30,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, addTask, toggleTask, deleteT
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'xavor-focus-tasks.txt';
+    a.download = 'TaskDownload.txt';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -38,10 +38,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, addTask, toggleTask, deleteT
   };
 
   const handleDelete = (id: number) => {
-      const taskToDelete = tasks.find(t => t.id === id);
-      if (taskToDelete && window.confirm(`Are you sure you want to delete this task?\n\n"${taskToDelete.text}"`)) {
-          deleteTask(id);
-      }
+    deleteTask(id);
   };
 
   return (

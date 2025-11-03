@@ -113,14 +113,13 @@ const App: React.FC = () => {
     setPhaseJustEnded(true);
     setTimeout(() => setPhaseJustEnded(false), 1000);
 
-    let newStats = { ...stats };
     if (phase === TimerPhase.Focus) {
-        newStats = {
-            ...stats,
-            completedPomodoros: stats.completedPomodoros + 1,
-            streak: stats.streak + 1,
-            points: stats.points + POINTS_PER_POMODORO
-        };
+        setStats(prevStats => ({
+            ...prevStats,
+            completedPomodoros: prevStats.completedPomodoros + 1,
+            streak: prevStats.streak + 1,
+            points: prevStats.points + POINTS_PER_POMODORO
+        }));
         if (sfxRef.current && settings.timerEndSfx) {
             sfxRef.current.src = settings.timerEndSfx;
             sfxRef.current.play().catch(e => console.error("End SFX failed:", e));
@@ -135,11 +134,10 @@ const App: React.FC = () => {
     
     setSessionCount(prev => phase === TimerPhase.Focus ? prev + 1 : prev);
     
-    setStats(newStats);
     const { nextPhase, nextDuration } = getNextPhase();
     resetTimerToPhase(nextPhase, nextDuration);
     setIsActive(true); // Auto-start next phase
-  }, [phase, stats, settings, getNextPhase, resetTimerToPhase]);
+  }, [phase, settings, getNextPhase, resetTimerToPhase]);
 
 
   useEffect(() => {
@@ -181,7 +179,7 @@ const App: React.FC = () => {
             settings.focusDuration * 60;
         setTimeLeft(newDuration);
     }
-  }, [settings.focusDuration, settings.shortBreakDuration, settings.longBreakDuration, phase]);
+  }, [settings.focusDuration, settings.shortBreakDuration, settings.longBreakDuration, phase, isActive]);
 
   // Volume effects
   useEffect(() => {
