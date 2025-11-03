@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Task } from '../types';
 import { TrashIcon } from './Icons';
+import Tooltip from './Tooltip';
 
 interface TaskListProps {
   tasks: Task[];
@@ -65,12 +66,14 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, addTask, toggleTask, deleteT
                   onChange={() => toggleTask(task.id)}
                   className="h-5 w-5 rounded border-gray-300 text-[var(--active-color)] focus:ring-[var(--active-color)] flex-shrink-0"
                 />
-                <label
-                  htmlFor={`task-${task.id}`}
-                  className={`ml-3 text-gray-800 dark:text-gray-300 truncate cursor-pointer ${task.completed ? 'line-through text-gray-500' : ''}`}
-                >
-                  {task.text}
-                </label>
+                <Tooltip text={task.text}>
+                  <label
+                    htmlFor={`task-${task.id}`}
+                    className={`ml-3 text-gray-800 dark:text-gray-300 truncate cursor-pointer ${task.completed ? 'line-through text-gray-500' : ''}`}
+                  >
+                    {task.text}
+                  </label>
+                </Tooltip>
             </div>
             <button
               onClick={() => handleDelete(task.id)}

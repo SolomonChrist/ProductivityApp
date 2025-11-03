@@ -169,17 +169,18 @@ const App: React.FC = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  // This effect resets the timer when settings for the CURRENT phase are changed while paused.
+  // This effect updates the timer if settings are changed WHILE the timer is paused.
+  // It no longer depends on `isActive`, preventing the reset-on-pause bug.
   useEffect(() => {
     if (!isActive) {
-        const newDuration =
-            phase === TimerPhase.Focus ? settings.focusDuration * 60 :
-            phase === TimerPhase.ShortBreak ? settings.shortBreakDuration * 60 :
-            phase === TimerPhase.LongBreak ? settings.longBreakDuration * 60 :
-            settings.focusDuration * 60;
-        setTimeLeft(newDuration);
+      const newDuration =
+        phase === TimerPhase.Focus ? settings.focusDuration * 60
+        : phase === TimerPhase.ShortBreak ? settings.shortBreakDuration * 60
+        : settings.longBreakDuration * 60;
+      setTimeLeft(newDuration);
     }
-  }, [settings.focusDuration, settings.shortBreakDuration, settings.longBreakDuration, phase, isActive]);
+  }, [settings.focusDuration, settings.shortBreakDuration, settings.longBreakDuration, phase, setTimeLeft]);
+
 
   // Volume effects
   useEffect(() => {
@@ -281,11 +282,21 @@ const App: React.FC = () => {
         setStats({ completedPomodoros: 0, totalFocusTime: 0, streak: 0, points: 0 });
     }
   }
+
+  const handleResetAllData = () => {
+    if (window.confirm('Are you sure you want to reset all data? This will erase all settings, stats, and tasks permanently.')) {
+        localStorage.clear();
+        window.location.reload();
+    }
+  };
   
   const handlePhaseSwitch = (newPhase: TimerPhase) => {
     setIsActive(false);
     if (audioRef.current) {
         audioRef.current.pause();
+    }
+    if (ambienceAudioRef.current) {
+      ambienceAudioRef.current.pause();
     }
     setPhase(newPhase);
     let newDuration;
@@ -427,6 +438,7 @@ const App: React.FC = () => {
                     showBreathingGuide={showBreathingGuide}
                     setShowBreathingGuide={setShowBreathingGuide}
                     onReset={handleReset}
+                    onResetAllData={handleResetAllData}
                     onExport={handleExport}
                     onImport={handleImport}
                 />

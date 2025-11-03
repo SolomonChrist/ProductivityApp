@@ -8,11 +8,12 @@ interface SettingsProps {
   showBreathingGuide: boolean;
   setShowBreathingGuide: (enabled: boolean) => void;
   onReset: () => void;
+  onResetAllData: () => void;
   onExport: () => void;
   onImport: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Settings: React.FC<SettingsProps> = ({ settings, setSettings, showBreathingGuide, setShowBreathingGuide, onReset, onExport, onImport }) => {
+const Settings: React.FC<SettingsProps> = ({ settings, setSettings, showBreathingGuide, setShowBreathingGuide, onReset, onResetAllData, onExport, onImport }) => {
   const importInputRef = useRef<HTMLInputElement>(null);
 
   // Use local state for string-based input values to provide a stable editing experience
@@ -114,11 +115,12 @@ const Settings: React.FC<SettingsProps> = ({ settings, setSettings, showBreathin
         <div className='flex items-center space-x-6'>
             <Toggle label="Breathing" id="breathingGuide" checked={showBreathingGuide} onChange={(e) => setShowBreathingGuide(e.target.checked)} tooltipText="Show a visual breathing guide during breaks to help you relax." />
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center flex-wrap justify-end gap-2">
             <button onClick={handleImportClick} className="text-sm font-medium px-3 py-1.5 rounded-md bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 transition">Import</button>
             <input type="file" ref={importInputRef} onChange={onImport} accept=".json" className="hidden" />
             <button onClick={onExport} className="text-sm font-medium px-3 py-1.5 rounded-md bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500 transition">Export</button>
             <button onClick={onReset} className="text-sm font-medium text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 transition">Reset Timer</button>
+            <button onClick={onResetAllData} className="text-sm font-medium text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 transition">Reset Data</button>
         </div>
       </div>
     </div>

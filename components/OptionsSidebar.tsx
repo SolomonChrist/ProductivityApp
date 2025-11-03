@@ -24,6 +24,7 @@ interface OptionsSidebarProps {
     showBreathingGuide: boolean;
     setShowBreathingGuide: (enabled: boolean) => void;
     onReset: () => void;
+    onResetAllData: () => void;
     onExport: () => void;
     onImport: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -34,7 +35,7 @@ const OptionsSidebar: React.FC<OptionsSidebarProps> = ({
     musicConfig, activeAmbienceKey, handleAmbienceClick, ambientVolume, setAmbientVolume,
     setIsMusicModalOpen,
     stats,
-    settings, setSettings, showBreathingGuide, setShowBreathingGuide, onReset, onExport, onImport
+    settings, setSettings, showBreathingGuide, setShowBreathingGuide, onReset, onResetAllData, onExport, onImport
 }) => {
     return (
         <aside className={`w-full bg-gray-200 dark:bg-gray-900/50 flex-shrink-0 flex flex-col lg:h-screen transition-all duration-300 ease-in-out ${isSidebarOpen ? 'p-6' : 'p-4 items-center'}`}>
@@ -102,6 +103,7 @@ const OptionsSidebar: React.FC<OptionsSidebarProps> = ({
                             showBreathingGuide={showBreathingGuide} 
                             setShowBreathingGuide={setShowBreathingGuide} 
                             onReset={onReset}
+                            onResetAllData={onResetAllData}
                             onExport={onExport}
                             onImport={onImport}
                         />
